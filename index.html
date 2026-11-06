@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Café De Binnenplaats: jaaroverzicht</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --muted: #6f6e69;
+    --grid: #e1e0d9; --axis: #c3c2b7; --border: rgba(11,11,11,.10);
+    --s1: #2a78d6; --tip: #0b0b0b; --tip-ink: #fcfcfb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #a3a29a;
+      --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,.10);
+      --s1: #3987e5; --tip: #f0efec; --tip-ink: #1a1a19;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--page); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 960px; margin: 0 auto; padding: 32px 16px 48px; }
+  header p { margin: 4px 0 0; color: var(--ink-2); }
+  h1 { font-size: 1.6rem; line-height: 1.2; margin: 0; font-weight: 650; }
+  h2 { font-size: 1.15rem; line-height: 1.3; margin: 0; font-weight: 650; }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 24px 0; }
+  .kpi, .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+  .kpi { padding: 16px; min-width: 0; }
+  .kpi .label { font-size: .875rem; color: var(--ink-2); }
+  .kpi .value { font-size: 1.65rem; line-height: 1.2; font-weight: 650; margin: 4px 0; overflow-wrap: anywhere; }
+  .kpi .note { font-size: .8125rem; color: var(--muted); }
+  .card { padding: 20px; margin-bottom: 16px; }
+  .sub { margin: 4px 0 12px; color: var(--ink-2); font-size: .9375rem; }
+  .chart { position: relative; width: 100%; min-height: 120px; }
+  .chart svg { display: block; width: 100%; height: auto; }
+  .chart text { font-family: inherit; }
+  details { margin-top: 12px; font-size: .875rem; color: var(--ink-2); }
+  summary { cursor: pointer; }
+  table { border-collapse: collapse; width: 100%; margin-top: 8px; font-variant-numeric: tabular-nums; }
+  th, td { padding: 6px 8px; text-align: right; border-bottom: 1px solid var(--grid); }
+  th:first-child, td:first-child { text-align: left; }
+  th { font-weight: 600; }
+  #tip { position: fixed; z-index: 10; pointer-events: none; display: none; max-width: 240px; padding: 8px 10px; border-radius: 6px; background: var(--tip); color: var(--tip-ink); font-size: .8125rem; line-height: 1.4; }
+  footer { font-size: .875rem; color: var(--ink-2); margin-top: 24px; }
+  footer h2 { font-size: 1rem; margin-bottom: 4px; color: var(--ink); }
+  footer ul { margin: 0; padding-left: 18px; }
+  @media (max-width: 720px) {
+    main { padding-top: 24px; }
+    .kpis { grid-template-columns: repeat(2, 1fr); }
+    .kpi .value { font-size: 1.35rem; }
+    .card { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Café De Binnenplaats</h1>
+    <p>Jaaroverzicht: 1 oktober 2025 t/m 30 september 2026</p>
+  </header>
+
+  <section class="kpis" aria-label="Kerncijfers">
+    <div class="kpi"><div class="label">Omzet</div><div class="value">ruim €&nbsp;1,1 miljoen</div><div class="note">met btw, afgerond</div></div>
+    <div class="kpi"><div class="label">Aantal bonnen</div><div class="value">ruim 35.000</div><div class="note">afgerond</div></div>
+    <div class="kpi"><div class="label">Gemiddelde bon</div><div class="value">ongeveer €&nbsp;33</div><div class="note">met btw, afgerond</div></div>
+    <div class="kpi"><div class="label">Brutomarge</div><div class="value">bijna 70%</div><div class="note">vóór personeel en huur</div></div>
+  </section>
+
+  <article class="card">
+    <h2>Zaterdag is de drukste dag, maandag en dinsdag zijn het rustigst</h2>
+    <p class="sub">Omzet per open dag, vergeleken met zaterdag (zaterdag = 100).</p>
+    <div class="chart" id="c1" role="img" aria-label="Staafgrafiek van de omzet per weekdag, vergeleken met zaterdag. Maandag 37, dinsdag 38, woensdag 61, donderdag 64, vrijdag 81, zaterdag 100, zondag 77."></div>
+    <details><summary>Bekijk de cijfers</summary><div id="t1"></div></details>
+  </article>
+
+  <footer>
+    <h2>Goed om te weten</h2>
+    <ul>
+      <li>Op maandag en dinsdag is er geen diner.</li>
+      <li>Brutomarge is wat overblijft van de omzet zonder btw na aftrek van de inkoop.</li>
+      <li>Alle cijfers komen uit fictieve oefendata.</li>
+    </ul>
+  </footer>
+</main>
+<div id="tip" role="status"></div>
+
+<script>
+const NS = 'http://www.w3.org/2000/svg';
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const dagen = [['Ma', 'Maandag', 37], ['Di', 'Dinsdag', 38], ['Wo', 'Woensdag', 61], ['Do', 'Donderdag', 64], ['Vr', 'Vrijdag', 81], ['Za', 'Zaterdag', 100], ['Zo', 'Zondag', 77]];
+
+function el(name, attrs, parent, text) {
+  const e = document.createElementNS(NS, name);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (text !== undefined) e.textContent = text;
+  parent.appendChild(e);
+  return e;
+}
+const tip = document.getElementById('tip');
+function showTip(ev, text) {
+  tip.textContent = text; tip.style.display = 'block';
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  tip.style.left = Math.max(8, Math.min(ev.clientX + 12, innerWidth - w - 8)) + 'px';
+  tip.style.top = Math.max(8, ev.clientY - h - 12) + 'px';
+}
+const hideTip = () => { tip.style.display = 'none'; };
+addEventListener('scroll', hideTip, { passive: true });
+
+function chart() {
+  const box = document.getElementById('c1'); box.innerHTML = '';
+  const W = box.clientWidth, H = W < 480 ? 240 : 280, m = { t: 24, r: 4, b: 28, l: 34 };
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, 'aria-hidden': 'true' }, box);
+  const iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const y = v => m.t + ih - v / 100 * ih;
+  [0, 25, 50, 75, 100].forEach(t => {
+    el('line', { x1: m.l, x2: W - m.r, y1: y(t), y2: y(t), stroke: css(t ? '--grid' : '--axis') }, svg);
+    el('text', { x: m.l - 8, y: y(t) + 4, 'text-anchor': 'end', 'font-size': 12, fill: css('--muted') }, svg, t);
+  });
+  const step = iw / dagen.length, bw = Math.min(56, step * .62), r = 4;
+  dagen.forEach((d, i) => {
+    const x = m.l + step * i + (step - bw) / 2, top = y(d[2]), base = y(0);
+    el('path', { d: `M${x},${base}V${top + r}Q${x},${top} ${x + r},${top}H${x + bw - r}Q${x + bw},${top} ${x + bw},${top + r}V${base}Z`, fill: css('--s1') }, svg);
+    el('text', { x: x + bw / 2, y: top - 6, 'text-anchor': 'middle', 'font-size': 13, 'font-weight': 600, fill: css('--ink') }, svg, d[2]);
+    el('text', { x: x + bw / 2, y: H - 8, 'text-anchor': 'middle', 'font-size': 13, fill: css('--ink-2') }, svg, d[0]);
+    const hit = el('rect', { x: m.l + step * i, y: m.t, width: step, height: ih, fill: 'transparent' }, svg);
+    const text = `${d[1]}: ${d[2]}`;
+    hit.addEventListener('pointermove', e => showTip(e, text));
+    hit.addEventListener('click', e => showTip(e, text));
+    hit.addEventListener('pointerleave', hideTip);
+  });
+}
+
+document.getElementById('t1').innerHTML = '<table><thead><tr><th>Dag</th><th>Zaterdag = 100</th></tr></thead><tbody>' +
+  dagen.map(d => `<tr><td>${d[1]}</td><td>${d[2]}</td></tr>`).join('') + '</tbody></table>';
+
+let lastW = 0;
+function draw(force) {
+  const w = document.querySelector('.card').clientWidth;
+  if (w < 200 || (w === lastW && force !== true)) return;
+  lastW = w; chart();
+}
+new ResizeObserver(() => draw()).observe(document.querySelector('main'));
+addEventListener('load', () => draw(true));
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => draw(true));
+</script>
+</body>
+</html>
